@@ -14,4 +14,7 @@ This app requires Firefox browser and python. You can find the link <a href="htt
 <br>   (This is the fake search data) 
 <br> 3. Lastly, add your credentials to the credentials.txt file in the correct format. 
 
-# Have fun and happy Binging!
+# Some advice for happy binging:
+<br> 1. No more than 5 accounts for IP.
+<br> 2. Don't use microsoft hosted emails.
+<br> 3. Cash in on rewards on distinct days with multiple days inbetween accounts.
