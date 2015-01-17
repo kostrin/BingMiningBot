@@ -32,6 +32,8 @@ class BingMine(object):
             print "No valid credentials!"
             return
 
+        print time.strftime("%c")
+
         for accountList in self.creds:
             user=accountList[0]
             passwd=accountList[1]
