@@ -18,3 +18,5 @@ This app requires Firefox browser and python. You can find the link <a href="htt
 <br> 1. No more than 5 accounts for IP.
 <br> 2. Don't use microsoft hosted emails.
 <br> 3. Cash in on rewards on distinct days with multiple days inbetween accounts.
+
+# Disclaimer: I am not responsible for your personal use of this application or any actions taken against your Microsoft accounts. (eg. Account banning.)

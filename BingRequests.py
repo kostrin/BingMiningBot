@@ -46,6 +46,10 @@ class BingRequests(object):
         query=self.generateQuery()
         browser.get(self.baseSearchURL+urllib.quote(query))
 
+    #TODO
+    def makeBonusRequests(self):
+        pass
+
     def getMobileUserAgent(self):
         return self.useragentMobile[randint(0,6)]
     
@@ -54,15 +58,17 @@ class BingRequests(object):
 
     def generateQuery(self):
         faker=Faker()
-        number = randint(0,4)
+        number = randint(0,6)
         if number == 0:
-            string = faker.phonenumber()
+            string = faker.full_address()
         elif number == 1:
             string = faker.name()
         elif number == 2:
             string = faker.username()
         elif number == 3:
             string = faker.email()
+        elif number == 4:
+            string = faker.city()
         else:
             string = faker.company()
         return string.decode('utf8')

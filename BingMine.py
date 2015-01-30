@@ -51,8 +51,7 @@ class BingMine(object):
             self.makeAllRequests(self.pcAttempts, browser)
             self.bingRewards.printCurrentRewards(browser)
             browser.quit()
-
-        #TODO: check if rewards are completed  
+ 
         #TODO: clear history   
             
             

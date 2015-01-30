@@ -13,3 +13,16 @@ class BingRewards(object):
         credits = browser.find_elements_by_class_name('credits')
         print "Current Credits: {}".format(credits[0].get_attribute("title"))
         print "Total Credits: {}".format(credits[1].get_attribute("title"))
+
+    #TODO
+    def getMobileRewards(self, totaRewardCount):
+        return False
+
+    def getPCRewards(self, totalRewardCount):
+        return False
+
+    def isRewardFinished(self, mobileCount, pcRewardCount):
+        if getMobileRewards(mobileCount) and getPCRewards(pcRewardCount)):
+            return True
+        else:
+            return False
