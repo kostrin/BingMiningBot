@@ -22,7 +22,7 @@ class BingRewards(object):
         return False
 
     def isRewardFinished(self, mobileCount, pcRewardCount):
-        if getMobileRewards(mobileCount) and getPCRewards(pcRewardCount)):
+        if getMobileRewards(mobileCount) and getPCRewards(pcRewardCount):
             return True
         else:
             return False
