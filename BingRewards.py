@@ -5,24 +5,41 @@ import time
 class BingRewards(object):
     def __init__(self):
         self.rewardspage="https://www.bing.com/rewards/dashboard"
+        self.pcTitle='pc search'
+        self.mobileTitle = 'mobile search'
+        self.notExtraTitles=[self.pcTitle, self.mobileTitle, 'invite friends']
    
     #Only works on PC browser
     def printCurrentRewards(self, browser):
     	browser.get(self.rewardspage)
-    	time.sleep(5)
+    	time.sleep(1)
         credits = browser.find_elements_by_class_name('credits')
         print "Current Credits: {}".format(credits[0].get_attribute("title"))
         print "Total Credits: {}".format(credits[1].get_attribute("title"))
 
-    #TODO
-    def getMobileRewards(self, totaRewardCount):
-        return False
+    def getRewardCounts(self, totalPCCount, totalMobileCount, browser):
+        browser.get(self.rewardspage)
+        time.sleep(1)
+        elements=list(reversed(browser.find_elements_by_class_name('title')))
+        titles=[item.text.lower() for item in elements]
+        mobileIndex=titles.index(self.mobileTitle)
+        pcIndex=titles.index(self.pcTitle)
 
-    def getPCRewards(self, totalRewardCount):
-        return False
+        progress =  list(reversed(browser.find_elements_by_class_name('progress')))
+        mobileCount= int(progress[mobileIndex].text.split()[0])
+        pcCount = int(progress[pcIndex].text.split()[0])
 
-    def isRewardFinished(self, mobileCount, pcRewardCount):
-        if getMobileRewards(mobileCount) and getPCRewards(pcRewardCount):
-            return True
-        else:
-            return False
+        #print "{}-{}   {}-{}".format(totalPCCount,pcCount,totalMobileCount,mobileCount)
+        return (totalPCCount-pcCount)*2, (totalMobileCount-mobileCount)*2
+
+    def getExtraRewards(self, browser):
+        browser.get(self.rewardspage)
+        time.sleep(1)
+        try:
+            for element in browser.find_elements_by_class_name('offers'):
+                    for aTag in element.find_elements_by_tag_name('a'):
+                        if aTag.find_element_by_class_name('title').text.lower() not in self.notExtraTitles:
+                            #print aTag.find_element_by_class_name('title').text
+                            aTag.click()
+        except:
+            print "Extra reward failed!"

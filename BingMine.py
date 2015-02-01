@@ -11,9 +11,9 @@ from BingRequests import BingRequests
 
 class BingMine(object):
 
-    def __init__(self,mobileAttempts=30,pcAttempts=46, upperWait=5, lowerWait=3):
-        self.mobileAttempts=pcAttempts
-        self.pcAttempts=mobileAttempts
+    def __init__(self,mobileAttempts=10,pcAttempts=15, upperWait=5, lowerWait=3):
+        self.mobileAttempts=mobileAttempts
+        self.pcAttempts=pcAttempts
         self.upperWait=upperWait
         self.lowerWait=lowerWait
 
@@ -41,17 +41,32 @@ class BingMine(object):
             self.browser=None
             print 'Running on account: %s'% (user)
             
-            userAgent=self.bingRequests.getMobileUserAgent()
-            browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
-            self.makeAllRequests(self.mobileAttempts, browser)
-            browser.quit()
-            
             userAgent=self.bingRequests.getPCUserAgent()
             browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
-            self.makeAllRequests(self.pcAttempts, browser)
+            pcCountNeeded, mobileCountNeed = self.bingRewards.getRewardCounts(self.pcAttempts, self.mobileAttempts, browser);
+            self.bingRewards.getExtraRewards(browser)
+            
+            while pcCountNeeded>0  or mobileCountNeed>0:
+                
+                #Make PC requests
+                self.makeAllRequests(pcCountNeeded, browser)
+                browser.quit()
+
+                #Make Mobile Request
+                userAgent=self.bingRequests.getMobileUserAgent()
+                browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
+                self.makeAllRequests(mobileCountNeed, browser)
+                browser.quit()
+                
+                #Check if done
+                userAgent=self.bingRequests.getPCUserAgent()
+                browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
+                pcCountNeeded, mobileCountNeed = self.bingRewards.getRewardCounts(self.pcAttempts, self.mobileAttempts, browser);
+
+            #Print final rewards
             self.bingRewards.printCurrentRewards(browser)
             browser.quit()
- 
+            
         #TODO: clear history   
             
             

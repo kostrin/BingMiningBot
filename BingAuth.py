@@ -35,7 +35,7 @@ class BingAuth(object):
         passwordField.send_keys(passwd)
         browser.find_element_by_name('KMSI').click()
         passwordField.submit()
-        time.sleep(5)
+        time.sleep(3)
     
     #TODO
     def liveLogout(self):
