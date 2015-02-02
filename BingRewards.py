@@ -14,8 +14,8 @@ class BingRewards(object):
     	browser.get(self.rewardspage)
     	time.sleep(1)
         credits = browser.find_elements_by_class_name('credits')
-        print "Current Credits: {}".format(credits[0].get_attribute("title"))
-        print "Total Credits: {}".format(credits[1].get_attribute("title"))
+        print "  Current Credits: {}".format(credits[0].get_attribute("title"))
+        print "  Total Credits: {}".format(credits[1].get_attribute("title"))
 
     def getRewardCounts(self, totalPCCount, totalMobileCount, browser):
         browser.get(self.rewardspage)
@@ -39,7 +39,8 @@ class BingRewards(object):
             for element in browser.find_elements_by_class_name('offers'):
                     for aTag in element.find_elements_by_tag_name('a'):
                         if aTag.find_element_by_class_name('title').text.lower() not in self.notExtraTitles:
-                            #print aTag.find_element_by_class_name('title').text
+                            print "     Reward: {}".format(aTag.find_element_by_class_name('title').text)
                             aTag.click()
         except:
-            print "Extra reward failed!"
+            pass
+            #print "Extra reward failed!"
