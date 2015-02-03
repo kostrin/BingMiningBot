@@ -38,9 +38,5 @@ class BingAuth(object):
         time.sleep(3)
     
     #TODO
-    def liveLogout(self):
-        pass
     def facebookLogin(self, browser, username, passwd):
-        pass
-    def facebookLogout(self):
         pass

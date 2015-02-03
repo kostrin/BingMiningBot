@@ -46,10 +46,6 @@ class BingRequests(object):
         query=self.generateQuery()
         browser.get(self.baseSearchURL+urllib.quote(query))
 
-    #TODO
-    def makeBonusRequests(self):
-        pass
-
     def getMobileUserAgent(self):
         return self.useragentMobile[randint(0,6)]
     
