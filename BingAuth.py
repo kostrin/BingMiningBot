@@ -15,8 +15,8 @@ class BingAuth(object):
         profile = webdriver.FirefoxProfile()
         profile.set_preference("general.useragent.override",userAgent)
         browser=webdriver.Firefox(profile)
-        browser.set_window_size(300,300)
-        browser.set_window_position(-300,-300)
+        #browser.set_window_size(300,300)
+        #browser.set_window_position(-300,-300)
         return browser
 
     def login(self, username, passwd, userAgent, accType):

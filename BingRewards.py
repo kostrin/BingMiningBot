@@ -35,12 +35,13 @@ class BingRewards(object):
     def getExtraRewards(self, browser):
         browser.get(self.rewardspage)
         time.sleep(1)
+        
         try:
-            for element in browser.find_elements_by_class_name('offers'):
-                    for aTag in element.find_elements_by_tag_name('a'):
-                        if aTag.find_element_by_class_name('title').text.lower() not in self.notExtraTitles:
-                            print "     Reward: {}".format(aTag.find_element_by_class_name('title').text)
-                            aTag.click()
+            element = browser.find_element_by_class_name('offers')
+            for aTag in element.find_elements_by_tag_name('a'):
+                if aTag.find_element_by_class_name('title').text.lower() not in self.notExtraTitles:
+                    print "     Reward: {}".format(aTag.find_element_by_class_name('title').text.encode('cp850', errors='replace'))
+                    aTag.click()
         except:
+            #catches the state change error when links are clicked
             pass
-            #print "Extra reward failed!"
