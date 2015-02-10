@@ -34,7 +34,7 @@ class BingRewards(object):
 
     def getExtraRewards(self, browser):
         browser.get(self.rewardspage)
-        time.sleep(1)
+        time.sleep(2)
         
         try:
             element = browser.find_element_by_class_name('offers')
