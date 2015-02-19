@@ -1,5 +1,4 @@
-import argparse
-import time
+import argparse, time, sys
 from random import randint
 
 from BingAuth import BingAuth
@@ -35,9 +34,14 @@ class BingMine(object):
         print time.strftime("%c")
 
         for accountList in self.creds:
-            user=accountList[0]
-            passwd=accountList[1]
-            accType=accountList[2]
+            try:
+                user=accountList[0]
+                passwd=accountList[1]
+                accType=accountList[2]
+            except:
+                print "Invalid credentials file formatting!"
+                sys.exit()
+
             self.browser=None
             print 'Running on account: %s'% (user)
             
@@ -81,15 +85,19 @@ class BingMine(object):
         #USAGE: USER PASS Type
         #NOTE: 1 user per line
         creds=[]
-        with open(credsFile) as f:
-            credsX=[]
-            for line in f:
-                if line[0]=='#':
-                    pass
-                else:
-                    data=line.split()
-                    creds.append(data)
-        return creds
+        try:
+            with open(credsFile) as f:
+                credsX=[]
+                for line in f:
+                    if line[0]=='#':
+                        pass
+                    else:
+                        data=line.split()
+                        creds.append(data)
+            return creds
+        except:
+            print "Invalid credentials file formatting!"
+            sys.exit()
 
 if __name__ == "__main__":
     b = BingMine()
