@@ -1,6 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import time
+import time, sys
 from BingRequests import BingRequests
 
 class BingAuth(object):
@@ -12,12 +12,17 @@ class BingAuth(object):
         self.facebookLogoffPage = ""
 
     def createBrowser(self, userAgent):
-        profile = webdriver.FirefoxProfile()
-        profile.set_preference("general.useragent.override",userAgent)
-        browser=webdriver.Firefox(profile)
-        #browser.set_window_size(300,300)
-        #browser.set_window_position(-300,-300)
-        return browser
+        try:
+            profile = webdriver.FirefoxProfile()
+            profile.set_preference("general.useragent.override",userAgent)
+            browser=webdriver.Firefox(profile)
+            #browser.set_window_size(300,300)
+            #browser.set_window_position(-300,-300)
+            return browser
+        except:
+            print "Selenium Error: Browser could not be created!"
+            sys.exit()
+
 
     def login(self, username, passwd, userAgent, accType):
         browser=self.createBrowser(userAgent)
