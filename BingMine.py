@@ -53,14 +53,16 @@ class BingMine(object):
             while pcCountNeeded>0  or mobileCountNeed>0:
                 
                 #Make PC requests
-                self.makeAllRequests(pcCountNeeded, browser)
-                browser.quit()
+                if pcCountNeeded>0:
+                    self.makeAllRequests(pcCountNeeded, browser)
+                    browser.quit()
 
                 #Make Mobile Request
-                userAgent=self.bingRequests.getMobileUserAgent()
-                browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
-                self.makeAllRequests(mobileCountNeed, browser)
-                browser.quit()
+                if mobileCountNeed>0:
+                    userAgent=self.bingRequests.getMobileUserAgent()
+                    browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
+                    self.makeAllRequests(mobileCountNeed, browser)
+                    browser.quit()
                 
                 #Check if done
                 userAgent=self.bingRequests.getPCUserAgent()
