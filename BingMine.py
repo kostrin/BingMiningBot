@@ -52,7 +52,7 @@ class BingMine(object):
                 #Make PC requests
                 if pcCountNeeded>0:
                     self.makeAllRequests(pcCountNeeded, browser)
-                    browser.quit()
+                browser.quit()
 
                 #Make Mobile Request
                 if mobileCountNeed>0:
