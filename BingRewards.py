@@ -45,6 +45,18 @@ class BingRewards(object):
                 if aTag.find_element_by_class_name('title').text.lower() not in self.notExtraTitles:
                     print "     Reward: {}".format(aTag.find_element_by_class_name('title').text.encode('cp850', errors='replace'))
                     aTag.click()
+            #close unnecessary windows
+            ''' DOESN'T WORK
+            print browser.window_handles
+            for window in browser.window_handles:
+                if window != browser.window_handles[0]:
+                    print window
+                    driver.switch_to_window(window)
+                    driver.close()
+                    time.sleep(5)
+            driver.switch_to_window(window_handles[0])
+            '''
+
         except:
             #catches the state change error when links are clicked
             pass
