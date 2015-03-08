@@ -5,9 +5,6 @@ from BingAuth import BingAuth
 from BingRewards import BingRewards
 from BingRequests import BingRequests
 
-#cron
-#python BingMine.py | exit
-
 class BingMine(object):
 
     def __init__(self,mobileAttempts=10,pcAttempts=15, upperWait=5, lowerWait=3):
@@ -69,10 +66,7 @@ class BingMine(object):
 
             #Print final rewards
             self.bingRewards.printCurrentRewards(browser)
-            browser.quit()
-            
-        #TODO: clear history   
-            
+            browser.quit()            
             
     def makeAllRequests(self, attempts, browser):
         inc=0
