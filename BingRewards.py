@@ -28,12 +28,17 @@ class BingRewards(object):
         mobileIndex=titles.index(self.mobileTitle)
         pcIndex=titles.index(self.pcTitle)
 
-        progress =  list(reversed(browser.find_elements_by_class_name('progress')))
-        mobileCount= int(progress[mobileIndex].text.split()[0])
-        pcCount = int(progress[pcIndex].text.split()[0])
+        try:
+            progress =  list(reversed(browser.find_elements_by_class_name('progress')))
+            mobileCount= int(progress[mobileIndex].text.split()[0])
+            pcCount = int(progress[pcIndex].text.split()[0])
 
-        #print "{}-{}   {}-{}".format(totalPCCount,pcCount,totalMobileCount,mobileCount)
-        return (totalPCCount-pcCount)*2, (totalMobileCount-mobileCount)*2
+            #print "{}-{}   {}-{}".format(totalPCCount,pcCount,totalMobileCount,mobileCount)
+            return (totalPCCount-pcCount)*2, (totalMobileCount-mobileCount)*2
+        
+        except:
+            print "     Error: Rewards Page couldn't be displayed properly"
+            return 0,0
 
     def getExtraRewards(self, browser):
         browser.get(self.rewardspage)
