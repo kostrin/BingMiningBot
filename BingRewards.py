@@ -54,10 +54,9 @@ class BingRewards(object):
         except:
             #catches the state change error when links are clicked
             pass
-            
+
         #close unnecessary windows
         time.sleep(2)
-        print browser.window_handles
         for window in browser.window_handles:
             if window != mainWindow:
                 browser.switch_to_window(window)
