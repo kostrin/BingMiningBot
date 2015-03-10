@@ -23,13 +23,16 @@ class BingRewards(object):
     def getRewardCounts(self, totalPCCount, totalMobileCount, browser):
         browser.get(self.rewardspage)
         time.sleep(1)
-        elements=list(reversed(browser.find_elements_by_class_name('title')))
+        groups=list(browser.find_elements_by_class_name('tileset'))
+        elements=list(groups[1].find_elements_by_class_name('title'))
         titles=[item.text.lower() for item in elements]
         mobileIndex=titles.index(self.mobileTitle)
         pcIndex=titles.index(self.pcTitle)
+        #print "mobile {}, pc {}".format(mobileIndex, pcIndex)
 
         try:
-            progress =  list(reversed(browser.find_elements_by_class_name('progress')))
+            groups=list(browser.find_elements_by_class_name('tileset'))
+            progress =  list(groups[1].find_elements_by_class_name('progress'))
             mobileCount= int(progress[mobileIndex].text.split()[0])
             pcCount = int(progress[pcIndex].text.split()[0])
 
