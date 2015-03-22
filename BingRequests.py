@@ -38,8 +38,6 @@ class BingRequests(object):
                     "Mozilla/5.0 (iPhone; CPU iPhone OS 6_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10A5376e Safari/8536.25",
                 # iPhone - iOS 9
                     "Mozilla/5.0 (iPhone; CPU iPhone OS 9_0 like Mac OS X) AppleWebKit/601.1.12 (KHTML, like Gecko) Version/8.0 Mobile/13A150 Safari/600.1.4",
-                # iPhone - iOS 8
-                    "Mozilla/5.0 (iPad; CPU OS 8_0 like Mac OS X) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/8.0 Mobile/11A465 Safari/9537.53"
         ]
 
     def makeRequest(self, browser):
@@ -47,7 +45,7 @@ class BingRequests(object):
         browser.get(self.baseSearchURL+urllib.quote(query))
 
     def getMobileUserAgent(self):
-        return self.useragentMobile[randint(0,6)]
+        return self.useragentMobile[randint(0,5)]
     
     def getPCUserAgent(self):
         return self.useragentPC[randint(0,7)]
