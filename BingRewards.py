@@ -30,7 +30,7 @@ class BingRewards(object):
             return 0,0
 
     def printCurrentRewards(self, browser):
-        currentCredits, totalCredits = self.getCurrentRewards(self,browser)
+        currentCredits, totalCredits = self.getCurrentRewards(browser)
         if(currentCredits>0 and totalCredits>0):
             print "  Current Credits: {}".format(currentCredits)
             print "  Total Credits: {}".format(totalCredits)
@@ -106,7 +106,7 @@ class BingRewards(object):
         browser.get(rewardPage)
         time.sleep(5)
         #finish clicking, hope that close will close all
-        
+
         time.sleep(5)
         with open(self.rewardsHistoryFile, 'ab+') as f:
             f.write('{} {} {}\n'.format( datetime.now().strftime("%m/%d"),user,self.targetRewardLabel))
