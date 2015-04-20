@@ -12,15 +12,18 @@ class BingMine(object):
         self.pcAttempts=pcAttempts
         self.upperWait=upperWait
         self.lowerWait=lowerWait
+        self.parseArgs()
 
         self.bingAuth = BingAuth()
-        self.bingRewards = BingRewards()
+        self.bingRewards = BingRewards(self.creds, self.rewardsHistoryFile)
         self.bingRequests = BingRequests()
         
     def parseArgs(self):
         parser = argparse.ArgumentParser(prog='Mine Bing Rewards', description='Will mine your Bing rewards for the day.', add_help=True)
         parser.add_argument('-c', '--credsFile', type=str, help='credentials to mine', default='credentials.txt')
+        parser.add_argument('-r', '--rewardsFile', type=str, help='rewards History file', default='rewardsHistory.txt')
         args = parser.parse_args()
+        self.rewardsHistoryFile=args.rewardsFile
         self.creds=self.getCreds(args.credsFile)
 
     def getRewards(self):
@@ -68,7 +71,27 @@ class BingMine(object):
 
             #Print final rewards
             self.bingRewards.printCurrentRewards(browser)
-            browser.quit()            
+            browser.quit()
+    
+    def cashReward(self):
+        for accountList in self.creds:
+            try:
+                user=accountList[0]
+                passwd=accountList[1]
+                accType=accountList[2]
+            except:
+                print "Invalid credentials file formatting!"
+                sys.exit()
+
+            self.browser=None
+            
+            userAgent=self.bingRequests.getPCUserAgent()
+            browser=self.bingAuth.login(user, passwd, userAgent, accType.lower())
+            
+            if self.bingRewards.cashInRewards(browser, user):
+                browser.quit()
+                break
+            browser.quit()
             
     def makeAllRequests(self, attempts, browser):
         inc=0
@@ -97,5 +120,5 @@ class BingMine(object):
 
 if __name__ == "__main__":
     b = BingMine()
-    b.parseArgs()
     b.getRewards()
+    #b.cashReward()  #NOT FUNCTIONING YET.
